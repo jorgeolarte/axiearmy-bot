@@ -1,0 +1,30 @@
+{
+  "name": "axiearmy",
+  "version": "1.0.0",
+  "description": "Notify about SLP and AXS prices",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npx nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "bot",
+    "discord",
+    "axie",
+    "infinity"
+  ],
+  "author": "Jorge Olarte",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "@discordjs/builders": "^0.12.0",
+    "@discordjs/rest": "^0.3.0",
+    "coingecko-api": "^1.0.10",
+    "discord-api-types": "^0.27.2",
+    "discord.js": "^13.6.0",
+    "dotenv": "^16.0.0",
+    "node-fetch": "^2.6.7"
+  }
+}
