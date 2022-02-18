@@ -29,6 +29,7 @@ const commands = [
         .addChoice("Last 7 days", "last7Days")
         .addChoice("Last 30 days", "last30Days")
     ),
+  new SlashCommandBuilder().setName("my-stats").setDescription("Get my stats!"),
   // new SlashCommandBuilder()
   //   .setName("ping")
   //   .setDescription("Replies with pong!"),

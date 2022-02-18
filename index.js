@@ -10,7 +10,8 @@ const {
   MessageButton,
 } = require("discord.js");
 const { getCryptoPrice } = require("./lib/coingecko");
-const { getOverviewToday } = require("./lib/axieInfinity");
+const { getOverviewToday } = require("./lib/graphQL");
+const { hasDiscordId, getRonin, getStatsByRonin } = require("./lib/axieStats");
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
@@ -74,6 +75,40 @@ client.on("interactionCreate", async (interaction) => {
     await interaction.reply(
       `El precio del ${option.toUpperCase()} es: **${cryptoPrice} USD**`
     );
+  } else if (commandName === "my-stats") {
+    if (interaction.member.roles.cache.has("944245904142114916")) {
+      if (
+        await hasDiscordId({
+          discordId: interaction.user.id,
+        })
+      ) {
+        let trainer = await getRonin({ discordId: interaction.user.id });
+
+        let stats = await getStatsByRonin(trainer.ronin);
+
+        const embed = new MessageEmbed()
+          .setColor("#ff95b9")
+          .setTitle(`${trainer.name} | ${trainer.team}`)
+          .setDescription(
+            `These are your stats :sunglasses: \n\n :military_medal: **Rank:** ${stats.rank} \n :trophy: **Cups:** ${stats.cups} \n :dollar: **SLP:** ${stats.slp}`
+          );
+
+        await interaction.reply({
+          ephemeral: true,
+          embeds: [embed],
+        });
+      } else {
+        await interaction.reply({
+          content: `No estas configurado`,
+          ephemeral: true,
+        });
+      }
+    } else {
+      await interaction.reply({
+        content: `No tienes permisos`,
+        ephemeral: true,
+      });
+    }
   }
 });
 
