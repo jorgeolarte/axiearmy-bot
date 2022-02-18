@@ -76,7 +76,9 @@ client.on("interactionCreate", async (interaction) => {
       `El precio del ${option.toUpperCase()} es: **${cryptoPrice} USD**`
     );
   } else if (commandName === "my-stats") {
-    if (interaction.member.roles.cache.has("944245904142114916")) {
+    if (
+      interaction.member.roles.cache.has(process.env.DISCORD_TRAINER_ROLE_ID)
+    ) {
       if (
         await hasDiscordId({
           discordId: interaction.user.id,
