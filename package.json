@@ -4,7 +4,6 @@
   "description": "Notify about SLP and AXS prices",
   "main": "index.js",
   "scripts": {
-    "postinstall": "npm run build",
     "start": "node index.js",
     "dev": "npx nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
