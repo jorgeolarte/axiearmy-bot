@@ -10,12 +10,13 @@ const commands = [
     .setDescription("Get cryptocurrency price!")
     .addStringOption((option) =>
       option
-        .setName("category")
+        .setName("currency")
         .setDescription("Select a crypto!")
         .setRequired(true)
         .addChoice("SLP", "slp")
         .addChoice("AXS", "axs")
         .addChoice("RON", "ron")
+        .addChoice("ETH", "eth")
     ),
   new SlashCommandBuilder()
     .setName("marketplace")
@@ -30,15 +31,6 @@ const commands = [
         .addChoice("Last 30 days", "last30Days")
     ),
   new SlashCommandBuilder().setName("my-stats").setDescription("Get my stats!"),
-  // new SlashCommandBuilder()
-  //   .setName("ping")
-  //   .setDescription("Replies with pong!"),
-  // new SlashCommandBuilder()
-  //   .setName("server")
-  //   .setDescription("Replies with server info!"),
-  // new SlashCommandBuilder()
-  //   .setName("user")
-  //   .setDescription("Replies with user info!"),
 ].map((command) => command.toJSON());
 
 const rest = new REST({ version: "9" }).setToken(process.env.DISCORD_TOKEN);
