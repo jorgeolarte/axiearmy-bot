@@ -7,40 +7,46 @@ module.exports = {
     .setName("my-stats")
     .setDescription("Get my stats!"),
   async execute(interaction) {
-    if (
-      interaction.member.roles.cache.has(process.env.DISCORD_TRAINER_ROLE_ID)
-    ) {
-      if (
-        await hasDiscordId({
-          discordId: interaction.user.id,
-        })
-      ) {
-        let trainer = await getRonin({ discordId: interaction.user.id });
+    let messageReply = {
+      title: "You need to be a trainer",
+      message: "Sorry, but this command only works in trainers role",
+    };
 
-        let stats = await getStatsByRonin(trainer.ronin);
+    messageReply = interaction.member.roles.cache.has(
+      process.env.DISCORD_TRAINER_ROLE_ID
+    )
+      ? await getMessageIfUserExist({ discordId: interaction.user.id })
+      : messageReply;
 
-        const embed = new MessageEmbed()
-          .setColor("#ff95b9")
-          .setTitle(`${trainer.name} | ${trainer.team}`)
-          .setDescription(
-            `These are your stats :sunglasses: \n\n :military_medal: **Rank:** ${stats.rank} \n :trophy: **Cups:** ${stats.cups} \n :dollar: **SLP:** ${stats.slp}`
-          );
-
-        await interaction.reply({
-          ephemeral: true,
-          embeds: [embed],
-        });
-      } else {
-        await interaction.reply({
-          content: `No estas configurado`,
-          ephemeral: true,
-        });
-      }
-    } else {
-      await interaction.reply({
-        content: `No tienes permisos`,
-        ephemeral: true,
-      });
-    }
+    await replyMessage(interaction, messageReply);
   },
 };
+
+async function replyMessage(interaction, messageReply) {
+  const embed = new MessageEmbed()
+    .setColor("#ff95b9")
+    .setTitle(`${messageReply.title}`)
+    .setDescription(`${messageReply.message}`);
+
+  await interaction.reply({
+    ephemeral: true,
+    embeds: [embed],
+  });
+}
+
+async function getMessageIfUserExist({ discordId }) {
+  if (!(await hasDiscordId({ discordId }))) {
+    return {
+      title: `Must be configured by admin`,
+      message: `Your username isn't configured yet`,
+    };
+  }
+
+  let trainer = await getRonin({ discordId });
+  let stats = await getStatsByRonin(trainer.ronin);
+
+  return {
+    title: `${trainer.name} | ${trainer.team}`,
+    message: `These are your stats :sunglasses: \n\n :military_medal: **Rank:** ${stats.rank} \n :trophy: **Cups:** ${stats.cups} \n :dollar: **SLP:** ${stats.slp}`,
+  };
+}
