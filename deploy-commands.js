@@ -26,9 +26,22 @@ const commands = [
         .setName("category")
         .setDescription("Select an option!")
         .setRequired(true)
-        .addChoice("Last 24 hours", "last24Hours")
-        .addChoice("Last 7 days", "last7Days")
-        .addChoice("Last 30 days", "last30Days")
+        .addChoice("last 24 hours", "last24Hours")
+        .addChoice("last 7 days", "last7Days")
+        .addChoice("last 30 days", "last30Days")
+    ),
+  new SlashCommandBuilder()
+    .setName("rank")
+    .setDescription("Who are our best trainers!")
+    .addStringOption(
+      (option) =>
+        option
+          .setName("option")
+          .setDescription("Select an option!")
+          .setRequired(true)
+          .addChoice("by world rank", "rank")
+          .addChoice("by cups", "cups")
+      // .addChoice("by SLP", "slp")
     ),
   new SlashCommandBuilder().setName("my-stats").setDescription("Get my stats!"),
 ].map((command) => command.toJSON());
