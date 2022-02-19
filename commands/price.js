@@ -22,7 +22,7 @@ module.exports = {
 
     let messageReply = {
       title: `View on CoinGecko`,
-      message: `Current ${option.toUpperCase()} price is \n **${price} USD**`,
+      message: `Current ${option.toUpperCase()} price \n **${price} USD**`,
       url: `https://www.coingecko.com/es/monedas/${cryptoId}`,
       imageURL,
       name,
