@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
+const { getCryptoPrice } = require("../lib/coingecko");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -14,6 +15,10 @@ module.exports = {
         .addChoice("RON", "ron")
     ),
   async execute(interaction) {
-    await interaction.reply("AXS!");
+    let option = interaction.options.getString("category");
+    let cryptoPrice = await getCryptoPrice(option);
+    await interaction.reply(
+      `El precio del ${option.toUpperCase()} es: **${cryptoPrice} USD**`
+    );
   },
 };
