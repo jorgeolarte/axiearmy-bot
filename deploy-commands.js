@@ -6,18 +6,8 @@ const { Routes } = require("discord-api-types/v9");
 
 const commands = [
   new SlashCommandBuilder()
-    .setName("price")
-    .setDescription("Get cryptocurrency price!")
-    .addStringOption((option) =>
-      option
-        .setName("currency")
-        .setDescription("Select a crypto!")
-        .setRequired(true)
-        .addChoice("SLP", "slp")
-        .addChoice("AXS", "axs")
-        .addChoice("RON", "ron")
-        .addChoice("ETH", "eth")
-    ),
+    .setName("prices")
+    .setDescription("Get cryptocurrencies prices!"),
   new SlashCommandBuilder()
     .setName("marketplace")
     .setDescription("Get marketplace stats!")
@@ -26,8 +16,8 @@ const commands = [
         .setName("category")
         .setDescription("Select an option!")
         .setRequired(true)
-        .addChoice("last 24 hours", "last24Hours")
         .addChoice("last 7 days", "last7Days")
+        .addChoice("last 24 hours", "last24Hours")
         .addChoice("last 30 days", "last30Days")
     ),
   new SlashCommandBuilder()

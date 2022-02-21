@@ -60,10 +60,9 @@ async function replyMessage(interaction, messageReply) {
     .setFooter({
       text: "Rank by Axie Army",
     });
-  // .setThumbnail("https://i.imgur.com/AfFp7pu.png");
-  // .setImage("https://i.imgur.com/AfFp7pu.png");
 
   await interaction.reply({
+    // ephemeral: true,
     embeds: [embed],
   });
 }
