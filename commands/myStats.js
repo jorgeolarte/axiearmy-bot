@@ -10,6 +10,7 @@ module.exports = {
     let messageReply = {
       title: "You need to be a trainer",
       message: "Sorry, but this command only works in trainers role",
+      fields: [],
     };
 
     messageReply = interaction.member.roles.cache.has(
@@ -26,7 +27,17 @@ async function replyMessage(interaction, messageReply) {
   const embed = new MessageEmbed()
     .setColor("#ff95b9")
     .setTitle(`${messageReply.title}`)
-    .setDescription(`${messageReply.message}`);
+    .setDescription(`${messageReply.message}`)
+    .addFields(messageReply.fields)
+    .setThumbnail(
+      "https://res.cloudinary.com/axiearmy-club/image/upload/v1645318880/axie-army/axie-army-logo-redes_bzpuhc.png"
+    )
+    .setTimestamp()
+    .setFooter({
+      text: "By Axie Army",
+      iconURL:
+        "https://res.cloudinary.com/axiearmy-club/image/upload/v1645318880/axie-army/axie-army-logo-redes_bzpuhc.png",
+    });
 
   await interaction.reply({
     ephemeral: true,
@@ -47,6 +58,23 @@ async function getMessageIfUserExist({ discordId }) {
 
   return {
     title: `${trainer.name} | ${trainer.team}`,
-    message: `These are your stats :sunglasses: \n\n :military_medal: **Rank:** ${stats.rank} \n :trophy: **Cups:** ${stats.cups} \n :dollar: **SLP:** ${stats.slp}`,
+    message: `These are your stats :sunglasses:`,
+    fields: [
+      {
+        name: `:military_medal: **Rank**`,
+        value: `${stats.rank}`,
+        inline: false,
+      },
+      {
+        name: `:trophy: **Cups**`,
+        value: `${stats.cups}`,
+        inline: false,
+      },
+      {
+        name: `:dollar: **SLP**`,
+        value: `${stats.slp}`,
+        inline: false,
+      },
+    ],
   };
 }

@@ -23,15 +23,14 @@ const commands = [
   new SlashCommandBuilder()
     .setName("rank")
     .setDescription("Who are our best trainers!")
-    .addStringOption(
-      (option) =>
-        option
-          .setName("option")
-          .setDescription("Select an option!")
-          .setRequired(true)
-          .addChoice("by world rank", "rank")
-          .addChoice("by cups", "cups")
-      // .addChoice("by SLP", "slp")
+    .addStringOption((option) =>
+      option
+        .setName("option")
+        .setDescription("Select an option!")
+        .setRequired(true)
+        .addChoice("by world rank", "rank")
+        .addChoice("by cups", "cups")
+        .addChoice("by SLP", "slp")
     ),
   new SlashCommandBuilder()
     .setName("mystats")
