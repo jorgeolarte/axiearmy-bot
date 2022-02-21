@@ -33,7 +33,9 @@ const commands = [
           .addChoice("by cups", "cups")
       // .addChoice("by SLP", "slp")
     ),
-  new SlashCommandBuilder().setName("my-stats").setDescription("Get my stats!"),
+  new SlashCommandBuilder()
+    .setName("mystats")
+    .setDescription("Hey trainer get your stats!"),
 ].map((command) => command.toJSON());
 
 const rest = new REST({ version: "9" }).setToken(process.env.DISCORD_TOKEN);

@@ -4,8 +4,8 @@ const { hasDiscordId, getRonin, getStatsByRonin } = require("../lib/teamStats");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("my-stats")
-    .setDescription("Get my stats!"),
+    .setName("mystats")
+    .setDescription("Hey trainer get your stats!"),
   async execute(interaction) {
     let messageReply = {
       title: "You need to be a trainer",

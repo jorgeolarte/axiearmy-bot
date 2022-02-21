@@ -27,7 +27,7 @@ module.exports = {
 
       messageReply.fields.push({
         name: `${name}`,
-        value: `${crypto[1].usd}`,
+        value: `${crypto[1].usd} USD`,
         inline: true,
       });
     });
