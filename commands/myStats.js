@@ -27,6 +27,7 @@ async function replyMessage(interaction, messageReply) {
   const embed = new MessageEmbed()
     .setColor("#ff95b9")
     .setTitle(`${messageReply.title}`)
+    .setURL(`https://www.axiearmy.club/trainer/${messageReply.ronin}`)
     .setDescription(`${messageReply.message}`)
     .addFields(messageReply.fields)
     .setThumbnail(
@@ -58,6 +59,7 @@ async function getMessageIfUserExist({ discordId }) {
 
   return {
     title: `${trainer.name} | ${trainer.team}`,
+    ronin: `${trainer.ronin}`,
     message: `These are your stats :sunglasses:`,
     fields: [
       {
